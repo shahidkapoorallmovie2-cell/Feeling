@@ -1,358 +1,283 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
-  <title>Link Master Pro · Shrt & Ad-Lock</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-  <style>
-    * { transition: background-color 0.2s ease, color 0.15s, border-color 0.2s; }
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-    .glass {
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .gradient-bg { background: linear-gradient(145deg, #0F172A 0%, #1E1B4B 50%, #2E1065 100%); }
-    .btn-primary { background: #7C3AED; color: white; }
-    .btn-locked { background: #ff0050; color: white; }
-    .toast {
-      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
-      background: #1E293B; color: #F8FAFC; padding: 0.75rem 2rem;
-      border-radius: 9999px; box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-      z-index: 1000; opacity: 0; transition: opacity 0.3s, transform 0.2s;
-      pointer-events: none; border: 1px solid rgba(255,255,255,0.1);
-    }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
-    input, select { background: rgba(255,255,255,0.05); border: 1px solid #334155; border-radius: 2rem; padding: 0.75rem 1.25rem; color: inherit; width: 100%; }
-    input:focus { outline: none; border-color: #7C3AED; box-shadow: 0 0 0 3px rgba(124,58,237,0.3); }
-    .animate-fade { animation: fadeIn 0.3s ease; }
-    @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
-    .chip { background: rgba(124,58,237,0.15); padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.7rem; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Love Proposal ❤️ | Powered by Badhon</title>
     
-    /* ল্যান্ডিং পেজ স্টাইল */
-    #landingOverlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: #0f0f1a; z-index: 9999; display: none; overflow-y: auto;
-    }
-    .progress-bar { height: 100%; background: #00f2ea; width: 0%; transition: width 0.1s linear; }
-  </style>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&family=Dancing+Script:wght@700&family=Noto+Serif+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --rose: #c9184a;
+            --light: #fff0f3;
+            --dark: #590d22;
+            --grad: linear-gradient(135deg, #ff758f 0%, #c9184a 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Hind Siliguri', sans-serif; background: var(--light); color: var(--dark); overflow-x: hidden; transition: 0.5s; }
+        .hidden { display: none !important; }
+
+        /* --- Dynamic Themes --- */
+        body.theme-1 { --grad: linear-gradient(135deg, #ff758f, #ff4d6d); --primary: #ff4d6d; }
+        body.theme-2 { --grad: linear-gradient(135deg, #1a1a2e, #16213e); --primary: #e94560; color: white; }
+        body.theme-3 { --grad: linear-gradient(135deg, #6a11cb, #2575fc); --primary: #fff; color: white; }
+        body.theme-4 { --grad: linear-gradient(135deg, #000000, #434343); --primary: #ff0000; color: white; }
+        body.theme-5 { --grad: linear-gradient(135deg, #f093fb, #f5576c); --primary: #fff; color: white; }
+
+        /* --- Particles --- */
+        .particles { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+        .p-heart { position: absolute; animation: floatUp 6s linear infinite; opacity: 0.6; color: var(--primary); }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) scale(0); opacity: 0; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        /* --- Layout --- */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--grad); transition: 1s; }
+        .glass-box { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(15px); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.3); z-index: 10; max-width: 600px; margin: 20px; text-align: center; }
+        
+        .creator-card { background: white; padding: 25px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); width: 95%; max-width: 550px; color: #333; overflow-y: auto; max-height: 90vh; z-index: 100; position: relative; }
+        
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; margin-bottom: 10px; }
+        .btn { padding: 12px 25px; border-radius: 50px; font-weight: 700; cursor: pointer; transition: 0.3s; border: none; font-size: 1rem; margin-top: 10px; }
+        .btn-main { background: var(--primary); color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 700; font-size: 0.85rem; }
+        .input-style { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 12px; outline: none; }
+
+        /* --- AI Message Box --- */
+        .ai-engine-box { background: #fff5f7; border: 2px dashed var(--primary); padding: 25px 15px 15px 15px; border-radius: 15px; margin-bottom: 10px; position: relative; }
+        .ai-badge { position: absolute; top: -12px; left: 15px; background: var(--primary); color: white; font-size: 0.65rem; padding: 4px 12px; border-radius: 20px; font-weight: bold; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3); white-space: nowrap; }
+        
+        .theme-grid { display: flex; gap: 10px; margin-top: 10px; justify-content: center; }
+        .theme-dot { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 3px solid #eee; transition: 0.3s; }
+        .theme-dot.active { border-color: var(--primary); transform: scale(1.2); }
+
+        /* --- Viewer --- */
+        .p-msg { font-size: 1.3rem; line-height: 1.6; font-style: italic; font-family: 'Noto Serif Bengali', serif; margin: 20px 0; }
+        .receiver-photo { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 5px solid white; margin-bottom: 15px; }
+
+        @media (max-width: 600px) { h1 { font-size: 2.2rem; } .p-msg { font-size: 1.1rem; } .ai-badge { font-size: 0.55rem; left: 10px; } }
+    </style>
 </head>
-<body class="gradient-bg text-slate-200 min-h-screen antialiased">
+<body class="theme-1">
 
-  <!-- ল্যান্ডিং পেজ (অ্যাড-লক) -->
-  <div id="landingOverlay">
-    <div class="flex flex-col items-center justify-center min-h-screen p-4">
-        <div class="glass p-6 rounded-2xl max-w-sm w-full mb-6 border-l-4 border-yellow-500">
-            <h3 class="text-yellow-500 font-bold mb-2"><i class="fas fa-exclamation-triangle mr-2"></i>ডাউনলোড করার নিয়ম</h3>
-            <ul class="text-sm text-slate-300 space-y-1">
-                <li>১. 'Unlock' বাটনে ক্লিক করে অ্যাড দেখুন।</li>
-                <li>২. ৫ সেকেন্ড অপেক্ষা করুন।</li>
-                <li>৩. এরপর ডাউনলোড বাটনটি আসবে।</li>
-            </ul>
-        </div>
-        <div class="glass p-8 rounded-[2rem] max-w-sm w-full text-center">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Capcut_logo.jpg" class="w-20 h-20 rounded-2xl mx-auto mb-4 shadow-2xl">
-            <h2 id="landTitle" class="text-2xl font-bold mb-4">File Unlocking...</h2>
-            
-            <button id="unlockBtn" onclick="startUnlock()" class="w-full py-4 rounded-xl bg-pink-600 hover:bg-pink-700 font-bold flex items-center justify-center gap-2">
-                <i class="fas fa-lock-open"></i> Watch Ad to Unlock
-            </button>
+<div class="particles" id="p-container"></div>
 
-            <div id="timerBox" class="hidden mt-4">
-                <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-                    <div id="pBar" class="progress-bar"></div>
-                </div>
-                <p class="text-xs mt-2 text-cyan-400">Verifying Advertisement...</p>
-            </div>
-
-            <a id="finalLink" href="#" class="hidden w-full py-4 rounded-xl bg-emerald-600 font-bold flex items-center justify-center gap-2">
-                <i class="fas fa-download"></i> Download Now 
-            </a>
-        </div>
-        <button onclick="location.reload()" class="mt-6 text-slate-500 text-sm">Cancel</button>
+<!-- ল্যান্ডিং পেজ -->
+<section id="landing" class="hero">
+    <div class="glass-box animate__animated animate__fadeIn">
+        <h1>Love Proposal ❤️</h1>
+        <p>ব্যক্ত করুন আপনার না বলা কথাগুলো। AI ম্যাজিক দিয়ে জেনারেট করুন ১০০০+ ইউনিক রোমান্টিক মেসেজ এবং প্রিয় মানুষকে চমকে দিন।</p>
+        <button onclick="navTo('creator')" class="btn btn-main">প্রপোজাল তৈরি করুন ✨</button>
     </div>
-  </div>
+</section>
 
-  <!-- Toast -->
-  <div id="toast" class="toast"></div>
-
-  <div class="container max-w-5xl mx-auto px-4 py-6 md:py-10" id="mainDashboard">
-    <!-- Header -->
-    <header class="text-center mb-10 animate-fade">
-      <div class="inline-block glass px-6 py-2 rounded-full text-sm mb-3 text-purple-300">
-        <i class="fas fa-bolt mr-2"></i> ১০০% ওয়ার্কিং · রিডাইরেক্ট + অ্যাড-লক সিস্টেম
-      </div>
-      <h1 class="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent leading-tight">
-        লিংক মাস্টার প্রিমিয়াম
-      </h1>
-      <p class="text-lg md:text-xl text-slate-300 mt-4 max-w-2xl mx-auto">
-        লিংক শর্ট করুন এবং অ্যাড-লকিং এর মাধ্যমে ইনকাম বা প্রোটেকশন নিশ্চিত করুন।
-      </p>
-    </header>
-
-    <!-- Shortener Input -->
-    <section class="glass card p-6 md:p-8 mb-10 animate-fade rounded-[2rem]">
-      <div class="flex flex-col md:flex-row gap-4">
-        <div class="flex-1">
-          <input type="url" id="urlInput" placeholder="https://google.com/your-long-link" class="w-full">
+<!-- ক্রিয়েটর ফর্ম -->
+<section id="creator" class="hero hidden">
+    <div class="creator-card animate__animated animate__fadeInUp">
+        <h2 style="text-align:center; color:var(--rose); margin-bottom:15px;">Infinity Creator 🎨</h2>
+        
+        <div class="form-group">
+            <label>প্রিয় মানুষের নাম</label>
+            <input type="text" id="rName" class="input-style" placeholder="তার নাম লিখুন">
         </div>
-        <div class="flex flex-wrap gap-2">
-          <input type="text" id="customAlias" placeholder="নাম (ঐচ্ছিক)" class="w-32 md:w-40">
-          <button onclick="handleShorten('direct')" class="btn-primary px-6 py-3 rounded-full font-semibold flex items-center gap-2">
-            <i class="fas fa-link"></i> ডিরেক্ট
-          </button>
-          <button onclick="handleShorten('locked')" class="btn-locked px-6 py-3 rounded-full font-semibold flex items-center gap-2">
-            <i class="fas fa-lock"></i> অ্যাড-লক
-          </button>
-        </div>
-      </div>
-      <div class="flex flex-wrap gap-3 mt-4 text-sm items-center">
-        <span class="chip"><i class="fas fa-bolt text-yellow-400 mr-1"></i> ডিরেক্ট: সরাসরি রিডাইরেক্ট হবে</span>
-        <span class="chip"><i class="fas fa-shield-alt text-pink-400 mr-1"></i> অ্যাড-লক: ল্যান্ডিং পেজ দেখাবে</span>
-      </div>
 
-      <!-- Result Box -->
-      <div id="shortResult" class="mt-5 hidden glass p-4 rounded-2xl border border-purple-500/30">
-        <div class="flex items-center justify-between flex-wrap gap-3">
-          <div class="flex items-center gap-3">
-            <i class="fas fa-check-circle text-green-400 text-xl"></i>
-            <span id="shortenedUrl" class="text-purple-300 font-mono break-all font-bold"></span>
-          </div>
-          <div class="flex gap-2">
-            <button id="copyBtn" class="bg-white/10 px-4 py-1.5 rounded-full text-sm hover:bg-white/20"><i class="far fa-copy"></i> কপি</button>
-            <button id="qrBtn" class="bg-white/10 px-4 py-1.5 rounded-full text-sm hover:bg-white/20"><i class="fas fa-qrcode"></i> QR</button>
-          </div>
-        </div>
-      </div>
-      <div id="qrPreview" class="mt-3 hidden glass p-3 rounded-2xl inline-block"></div>
-    </section>
-
-    <!-- Stats -->
-    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 animate-fade">
-      <div class="glass p-4 rounded-2xl text-center"><span class="text-2xl font-bold text-purple-300" id="totalLinks">0</span><p class="text-xs opacity-70">মোট লিংক</p></div>
-      <div class="glass p-4 rounded-2xl text-center"><span class="text-2xl font-bold text-emerald-300" id="totalClicks">0</span><p class="text-xs opacity-70">মোট ক্লিক</p></div>
-      <div class="glass p-4 rounded-2xl text-center"><span class="text-2xl font-bold text-pink-300" id="popularLink">-</span><p class="text-xs opacity-70">সেরা লিংক</p></div>
-      <div class="glass p-4 rounded-2xl text-center"><span class="text-2xl font-bold text-cyan-300" id="recentLink">-</span><p class="text-xs opacity-70">সাম্প্রতিক</p></div>
-    </section>
-
-    <!-- Charts -->
-    <div class="grid md:grid-cols-3 gap-4 mb-8 animate-fade">
-      <div class="glass p-4 rounded-2xl h-48"><canvas id="barChart"></canvas></div>
-      <div class="glass p-4 rounded-2xl h-48"><canvas id="pieChart"></canvas></div>
-      <div class="glass p-4 rounded-2xl h-48"><canvas id="lineChart"></canvas></div>
-    </div>
-
-    <!-- Links List -->
-    <div class="glass p-5 rounded-3xl mb-8 animate-fade">
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-        <h2 class="text-xl font-bold flex items-center gap-2"><i class="fas fa-list-ul text-primary"></i> আমার লিংকসমূহ</h2>
-        <div class="flex gap-2">
-            <button onclick="exportData('csv')" class="bg-emerald-600/30 px-3 py-1.5 rounded-full text-xs">CSV</button>
-            <button onclick="exportData('json')" class="bg-sky-600/30 px-3 py-1.5 rounded-full text-xs">JSON</button>
-        </div>
-      </div>
-      <div id="linksContainer" class="space-y-3 max-h-96 overflow-y-auto pr-1"></div>
-    </div>
-    
-    <p class="text-center text-xs opacity-40">Link Master Pro &copy; 2024 · All Rights Reserved</p>
-  </div>
-
-  <script>
-    "use strict";
-    
-    // কনফিগারেশন
-    const AD_DIRECT_LINK = "https://www.effectivecpmnetwork.com/mxw04cquv9?key=f1c398c287a71ffcfc22a911393bc076"; // আপনার Adsterra বা অ্যাড লিঙ্ক এখানে দিন
-    
-    let links = JSON.parse(localStorage.getItem('shortLinks')) || [];
-    let currentTarget = "";
-
-    const $ = id => document.getElementById(id);
-    const toast = $('toast');
-
-    function showToast(msg, type='info'){
-        toast.textContent = msg;
-        toast.className = 'toast show';
-        toast.style.background = type === 'success' ? '#065F46' : (type === 'error' ? '#7F1D1D' : '#1E293B');
-        setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    // ---------- রিডাইরেক্ট লজিক (সবার আগে চলবে) ----------
-    function checkRedirect() {
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get('r');
-        if (code) {
-            const found = links.find(l => l.shortCode === code);
-            if (found) {
-                found.clicks = (found.clicks || 0) + 1;
-                saveLinks();
+        <div class="form-group">
+            <label>1,000+ Unique Message Generator</label>
+            <div class="ai-engine-box">
+                <!-- Power Credit Added Here -->
+                <span class="ai-badge">Infinity Engine | Powered by Robin Hossen Badhon</span>
                 
-                if (found.type === 'locked') {
-                    $('mainDashboard').style.display = 'none';
-                    $('landingOverlay').style.display = 'block';
-                    currentTarget = found.originalUrl;
-                } else {
-                    window.location.replace(found.originalUrl);
-                }
-            } else {
-                showToast('লিঙ্ক খুঁজে পাওয়া যায়নি!', 'error');
-            }
-        }
-    }
-
-    // ---------- অ্যাড-লক প্রসেস ----------
-    function startUnlock() {
-        window.open(AD_DIRECT_LINK, '_blank');
-        $('unlockBtn').style.display = 'none';
-        $('timerBox').style.display = 'block';
-        
-        let w = 0;
-        const intr = setInterval(() => {
-            w++;
-            $('pBar').style.width = w + '%';
-            if (w >= 100) {
-                clearInterval(intr);
-                $('timerBox').style.display = 'none';
-                $('finalLink').style.display = 'flex';
-                $('finalLink').href = currentTarget;
-                $('landTitle').textContent = "Link Unlocked!";
-            }
-        }, 50); // ৫ সেকেন্ড
-    }
-
-    // ---------- লিঙ্ক তৈরি ----------
-    function handleShorten(type) {
-        const url = $('urlInput').value.trim();
-        const alias = $('customAlias').value.trim();
-        
-        if (!url || !url.startsWith('http')) return showToast('সঠিক URL দিন!', 'error');
-
-        const code = alias || Math.random().toString(36).substring(2, 8);
-        if (links.find(l => l.shortCode === code)) return showToast('এই নাম ইতিমধ্যে আছে!', 'error');
-
-        const shortUrl = window.location.origin + window.location.pathname + "?r=" + code;
-        
-        const newLink = {
-            id: Date.now(),
-            originalUrl: url,
-            shortCode: code,
-            shortUrl: shortUrl,
-            type: type,
-            clicks: 0,
-            createdAt: new Date().toISOString()
-        };
-
-        links.unshift(newLink);
-        saveLinks();
-        renderLinks();
-        
-        $('shortResult').classList.remove('hidden');
-        $('shortenedUrl').textContent = shortUrl;
-        showToast('লিঙ্ক তৈরি হয়েছে!', 'success');
-    }
-
-    function renderLinks() {
-        const container = $('linksContainer');
-        if (links.length === 0) {
-            container.innerHTML = `<p class="text-center py-4 opacity-40">কোনো লিঙ্ক নেই</p>`;
-            return;
-        }
-
-        container.innerHTML = links.map(l => `
-            <div class="glass p-4 rounded-2xl flex flex-wrap items-center justify-between gap-3 animate-fade">
-                <div class="flex-1 min-w-[200px]">
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded ${l.type === 'locked' ? 'bg-pink-500/20 text-pink-400' : 'bg-emerald-500/20 text-emerald-400'}">${l.type}</span>
-                        <span class="text-xs opacity-50">${l.shortCode}</span>
-                    </div>
-                    <div class="text-sm truncate w-64 opacity-70">${l.originalUrl}</div>
-                    <div class="text-purple-400 font-mono text-xs mt-1">${l.shortUrl}</div>
-                </div>
-                <div class="flex items-center gap-3">
-                    <div class="text-center px-3">
-                        <div class="text-lg font-bold">${l.clicks}</div>
-                        <div class="text-[10px] opacity-50">CLICKS</div>
-                    </div>
-                    <button onclick="copyToClipboard('${l.shortUrl}')" class="p-2 bg-white/5 rounded-full hover:bg-white/10"><i class="far fa-copy"></i></button>
-                    <button onclick="deleteLink(${l.id})" class="p-2 bg-red-500/10 text-red-400 rounded-full hover:bg-red-500/20"><i class="fas fa-trash"></i></button>
-                </div>
+                <p id="aiPreview" style="font-size:0.9rem; color:#444; min-height:60px; margin-top: 5px; line-height: 1.4;">বাটনে ক্লিক করলে এখানে মেসেজ তৈরি হবে...</p>
+                <button onclick="generateAIMessage()" class="btn" style="background:white; border:1px solid var(--primary); color:var(--primary); font-size:0.8rem; padding:5px 15px;">
+                    <i class="fas fa-sync-alt"></i> নতুন মেসেজ তৈরি করুন
+                </button>
             </div>
-        `).join('');
+            <textarea id="finalMsg" class="input-style" rows="4" placeholder="মেসেজটি এখানে এডিট করুন..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>ফটো লিঙ্ক (ঐচ্ছিক)</label>
+            <input type="text" id="photoUrl" class="input-style" placeholder="https://example.com/photo.jpg">
+        </div>
+
+        <div class="form-group">
+            <label>থিম নির্বাচন করুন</label>
+            <div class="theme-grid">
+                <div class="theme-dot" style="background:linear-gradient(#ff758f, #ff4d6d)" onclick="setTheme(1, this)"></div>
+                <div class="theme-dot" style="background:linear-gradient(#1a1a2e, #16213e)" onclick="setTheme(2, this)"></div>
+                <div class="theme-dot" style="background:linear-gradient(#6a11cb, #2575fc)" onclick="setTheme(3, this)"></div>
+                <div class="theme-dot" style="background:linear-gradient(#000, #434343)" onclick="setTheme(4, this)"></div>
+                <div class="theme-dot" style="background:linear-gradient(#f093fb, #f5576c)" onclick="setTheme(5, this)"></div>
+            </div>
+        </div>
+
+        <button onclick="buildLink()" class="btn btn-main" style="width:100%;">ম্যাজিক লিঙ্ক জেনারেট করুন ❤️</button>
+    </div>
+</section>
+
+<!-- ভিউয়ার পেজ -->
+<section id="viewer" class="hero hidden">
+    <div class="glass-box animate__animated animate__zoomIn">
+        <img id="vPhoto" src="" class="receiver-photo hidden">
+        <h1 id="vGreeting">প্রিয়,</h1>
+        <p id="vMsg" class="p-msg"></p>
+        <div style="font-family:'Dancing Script'; font-size:2.2rem; margin-bottom:20px;">Will You Be Mine? ❤️</div>
         
-        updateStats();
-        updateCharts();
+        <div id="actionArea" style="display:flex; justify-content:center; gap:15px;">
+            <button onclick="celebrate()" class="btn btn-main" style="background:#2ecc71;">হ্যাঁ ❤️</button>
+            <button id="no-btn" class="btn btn-main" style="background:#e74c3c;">না 💔</button>
+        </div>
+    </div>
+</section>
+
+<!-- শেয়ার ওভারলে -->
+<div id="shareOverlay" class="hero hidden" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000;">
+    <div class="glass-box animate__animated animate__bounceIn" style="background:white; color:#333;">
+        <h2 style="color:var(--primary);">লিঙ্ক রেডি! 🎉</h2>
+        <input type="text" id="finalUrl" style="width:100%; padding:12px; margin:15px 0; background:#f5f5f5; border:1px solid #ddd; border-radius:10px;" readonly>
+        <button onclick="copy()" class="btn btn-main" style="width:100%;">কপি লিঙ্ক 📋</button>
+        <p onclick="location.reload()" style="margin-top:15px; cursor:pointer; font-size:0.8rem; color:#888;">নতুন করে তৈরি করুন</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+    // --- Infinity AI Message Engine (10x10x10 = 1,000 Combinations) ---
+    const part1 = [
+        "তোমাকে প্রথম দেখার মুহূর্ত থেকেই,", 
+        "জীবনের এই এলোমেলো পথে চলতে চলতে,", 
+        "নিঝুম রাতের রূপালী চাঁদনী দেখে,", 
+        "নিস্তব্ধ দুপুরে একাকী বসে থাকার সময়,", 
+        "হাজার মানুষের ভিড়েও যখন নিজেকে একা মনে হয়,", 
+        "প্রতিটি সকালের নতুন সূর্যের আলোয়,", 
+        "নীল আকাশের সাদা মেঘের ভেলা দেখে,", 
+        "বৃষ্টিভেজা বিকেলের জানালার পাশে বসে,", 
+        "হৃদয়ের একদম গভীরতম কোনো এক কোণ থেকে,", 
+        "স্মৃতির পাতায় তোমার মিষ্টি হাসি যখন ভেসে ওঠে,"
+    ];
+    const part2 = [
+        "শুধু তোমাকেই একপলক দেখার তৃষ্ণা জাগে।", 
+        "অনুভব করি আমার পৃথিবীটা কত রঙিন।", 
+        "তোমার মায়াবী চোখের নেশায় আমি বারবার ডুবে যাই।", 
+        "বুঝতে পারি তুমি ছাড়া আমার অস্তিত্ব অপূর্ণ।", 
+        "এক অদ্ভুত প্রশান্তি আমার মনে খেলা করে।", 
+        "ইচ্ছে হয় সারাজীবন তোমার হাতটা ধরে কাটাতে।", 
+        "মনে হয় যেন স্বর্গের কোনো অপ্সরীকে দেখছি।", 
+        "তোমার কণ্ঠস্বর শোনার জন্য মন ব্যাকুল হয়ে থাকে।", 
+        "নিজেকে পৃথিবীর সবচেয়ে সুখী মানুষ বলে মনে হয়।", 
+        "জীবনের প্রতিটি মোড়ে শুধু তোমার অভাব বোধ করি।"
+    ];
+    const part3 = [
+        "তুমি কি আমার সারাজীবনের সাথী হবে?", 
+        "আমাদের এই সুন্দর গল্পের শেষ পাতা পর্যন্ত থাকবে কি?", 
+        "আমার হৃদস্পন্দন হয়ে কি আমার মাঝেই বেঁচে রবে?", 
+        "তুমি কি আমার স্বপ্নের রাজকন্যা হতে চাও?", 
+        "চলো না, নতুন এক পৃথিবী গড়ি যেখানে শুধু আমরা থাকব।", 
+        "এই হাতটা কি কখনো ছেড়ে যাবে না বলে কথা দিবে?", 
+        "আমার অন্ধকারের জীবনে কি আলো হয়ে আসবে?", 
+        "উইল ইউ বি মাই ফরএভার ভ্যালেন্টাইন?", 
+        "আমার অগোছালো জীবনটাকে গুছিয়ে দিবে কি?", 
+        "তুমি কি আমার এই ছোট্ট হৃদয়ের মালিক হবে?"
+    ];
+
+    function generateAIMessage() {
+        const p1 = part1[Math.floor(Math.random() * part1.length)];
+        const p2 = part2[Math.floor(Math.random() * part2.length)];
+        const p3 = part3[Math.floor(Math.random() * part3.length)];
+        const message = `${p1} ${p2} ${p3}`;
+        document.getElementById('aiPreview').innerText = message;
+        document.getElementById('finalMsg').value = message;
     }
 
-    function saveLinks() { localStorage.setItem('shortLinks', JSON.stringify(links)); }
+    // --- Core UI Logic ---
+    let currentTheme = 1;
+    function setTheme(t, el) {
+        document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+        el.classList.add('active');
+        currentTheme = t;
+        document.body.className = `theme-${t}`;
+    }
 
-    function deleteLink(id) {
-        if (confirm('লিঙ্কটি মুছে ফেলবেন?')) {
-            links = links.filter(l => l.id !== id);
-            saveLinks();
-            renderLinks();
+    function navTo(id) {
+        document.getElementById('landing').classList.add('hidden');
+        document.getElementById(id).classList.remove('hidden');
+    }
+
+    function buildLink() {
+        const data = {
+            r: document.getElementById('rName').value || 'প্রিয়',
+            m: document.getElementById('finalMsg').value || 'উইল ইউ বি মাইন?',
+            p: document.getElementById('photoUrl').value,
+            t: currentTheme
+        };
+        const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+        const url = window.location.origin + window.location.pathname + '?love=' + encoded;
+        document.getElementById('finalUrl').value = url;
+        document.getElementById('shareOverlay').classList.remove('hidden');
+    }
+
+    function copy() {
+        const input = document.getElementById('finalUrl');
+        input.select();
+        document.execCommand('copy');
+        alert('লিঙ্ক কপি হয়েছে! ❤️');
+    }
+
+    // --- Viewer Engine ---
+    window.onload = function() {
+        const params = new URLSearchParams(window.location.search);
+        const data = params.get('love');
+        if (data) {
+            try {
+                const decoded = JSON.parse(decodeURIComponent(escape(atob(data))));
+                document.getElementById('landing').classList.add('hidden');
+                document.getElementById('viewer').classList.remove('hidden');
+                document.body.className = `theme-${decoded.t}`;
+                document.getElementById('vGreeting').innerText = `প্রিয় ${decoded.r},`;
+                document.getElementById('vMsg').innerText = decoded.m;
+                if (decoded.p) {
+                    const img = document.getElementById('vPhoto');
+                    img.src = decoded.p;
+                    img.classList.remove('hidden');
+                }
+                const noBtn = document.getElementById('no-btn');
+                noBtn.onmouseover = () => {
+                    noBtn.style.position = 'fixed';
+                    noBtn.style.left = Math.random() * 80 + 'vw';
+                    noBtn.style.top = Math.random() * 80 + 'vh';
+                };
+            } catch(e) { console.error("Error decoding link"); }
         }
-    }
-
-    function copyToClipboard(txt) {
-        navigator.clipboard.writeText(txt);
-        showToast('কপি করা হয়েছে!', 'success');
-    }
-
-    function updateStats() {
-        $('totalLinks').textContent = links.length;
-        $('totalClicks').textContent = links.reduce((a, b) => a + b.clicks, 0);
-        if (links.length > 0) {
-            const top = [...links].sort((a,b) => b.clicks - a.clicks)[0];
-            $('popularLink').textContent = top.shortCode;
-            $('recentLink').textContent = links[0].shortCode;
-        }
-    }
-
-    // ---------- চার্টস ----------
-    let charts = {};
-    function updateCharts() {
-        const labels = links.slice(0, 5).map(l => l.shortCode);
-        const data = links.slice(0, 5).map(l => l.clicks);
-        
-        if (charts.bar) charts.bar.destroy();
-        if (charts.pie) charts.pie.destroy();
-        
-        const config = (type) => ({
-            type: type,
-            data: { labels, datasets: [{ data, backgroundColor: ['#7C3AED', '#EC4899', '#10B981', '#F59E0B', '#3B82F6'] }] },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-        });
-
-        charts.bar = new Chart($('barChart'), config('bar'));
-        charts.pie = new Chart($('pieChart'), config('pie'));
-        charts.line = new Chart($('lineChart'), config('line'));
-    }
-
-    // QR Code
-    $('qrBtn').onclick = () => {
-        const url = $('shortenedUrl').textContent;
-        $('qrPreview').innerHTML = "";
-        $('qrPreview').classList.remove('hidden');
-        new QRCode($('qrPreview'), { text: url, width: 100, height: 100 });
     };
 
-    // Export
-    window.exportData = (format) => {
-        let content = format === 'csv' ? "ShortCode,OriginalURL,Clicks\n" + links.map(l => `${l.shortCode},${l.originalUrl},${l.clicks}`).join("\n") : JSON.stringify(links);
-        const blob = new Blob([content], { type: 'text/plain' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `links-backup.${format}`;
-        a.click();
-    };
+    function celebrate() {
+        confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+        document.getElementById('actionArea').innerHTML = `<h2 class="animate__animated animate__heartBeat">It's a YES! ❤️</h2>`;
+    }
 
-    // Initialize
-    checkRedirect();
-    renderLinks();
-  </script>
+    // Floating Hearts
+    setInterval(() => {
+        const heart = document.createElement('i');
+        heart.className = 'fas fa-heart p-heart';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        document.getElementById('p-container').appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }, 400);
+
+    // Generate initial AI message
+    generateAIMessage();
+</script>
+
 </body>
-                    </html>
+  </html>
